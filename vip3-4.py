@@ -22,6 +22,28 @@ def generate_random_string(length):
 
 
 
+#session_auth = usdt_perpetual.HTTP(
+#    endpoint="https://api-testnet.bybit.com",
+#    api_key='fV9iCHzzWZoJc3POp0',
+#    api_secret='I5mjlAgcQTf5m2Io2E9S5cTdJTr9AhbDzUVj'
+#)
+#session_unauth = usdt_perpetual.HTTP(
+#    endpoint="https://api-testnet.bybit.com"
+#)
+#
+##API Ignat
+#session_auth_2 = usdt_perpetual.HTTP(
+#    endpoint="https://api-testnet.bybit.com",
+#    api_key='fV9iCHzzWZoJc3POp0',
+#    api_secret='I5mjlAgcQTf5m2Io2E9S5cTdJTr9AhbDzUVj'
+#)
+#
+#session_auth_3 = usdt_perpetual.HTTP(
+#    endpoint="https://api-testnet.bybit.com",
+#    api_key='fV9iCHzzWZoJc3POp0',
+#    api_secret='I5mjlAgcQTf5m2Io2E9S5cTdJTr9AhbDzUVj'
+#)
+
 session_auth = usdt_perpetual.HTTP(
     endpoint="https://api.bybit.com",
     api_key='H9X78xMQgIP5yDSyok',
@@ -43,20 +65,6 @@ session_auth_3 = usdt_perpetual.HTTP(
     api_key='3B3Bek9eVk7HQx6cW7',
     api_secret='uHGYQNdkABFIqlPnj9SVa9MllxsRwzF2uhNM'
 )
-#session_auth = usdt_perpetual.HTTP(
-#    endpoint="https://api-testnet.bybit.com",
-#    api_key='62gxiPbRw6saOzDXdY',
-#    api_secret='mA2lbXdmlnE0LTFJwn5uxySWtWpfnBzJgyfS'
-#)
-#session_unauth = usdt_perpetual.HTTP(
-#    endpoint="https://api-testnet.bybit.com"
-#)
-#
-#session_auth_2 = usdt_perpetual.HTTP(
-#    endpoint="https://api-testnet.bybit.com",
-#    api_key='IfbmkbhUtzMeMuXbRS',
-#    api_secret='Wco2ck20TKvm8nCDhlbIdzWLjd1Qhc0ahJEL'
-#)
 
 print(session_auth.get_wallet_balance()['result']['USDT']['equity'])
 
@@ -120,6 +128,32 @@ ws_linear_maks = usdt_perpetual.WebSocket(
     domain="bybit"  # the default is "bybit"
 )
 
+#ws_linear_maks = usdt_perpetual.WebSocket(
+#    test=False,
+#    api_key="3B3Bek9eVk7HQx6cW7",
+#    api_secret="uHGYQNdkABFIqlPnj9SVa9MllxsRwzF2uhNM",
+#    ping_interval=30,  # the default is 30
+#    ping_timeout=10,  # the default is 10
+#    domain="bybit"  # the default is "bybit"
+#)
+#
+#ws_linear_ignat = usdt_perpetual.WebSocket(
+#    test=False,
+#    api_key="jkVW1Q7h6GvTawBHIT",
+#    api_secret="I0gX1MLecoi8SlyCIIUEWo315VrWD2bs6moL",
+#    ping_interval=30,  # the default is 30
+#    ping_timeout=10,  # the default is 10
+#    domain="bybit"  # the default is "bybit"
+#)
+#
+#ws_linear_maks = usdt_perpetual.WebSocket(
+#    test=False,
+#    api_key="3B3Bek9eVk7HQx6cW7",
+#    api_secret="uHGYQNdkABFIqlPnj9SVa9MllxsRwzF2uhNM",
+#    ping_interval=30,  # the default is 30
+#    ping_timeout=10,  # the default is 10
+#    domain="bybit"  # the default is "bybit"
+#)
 
 
 def thread_function():
@@ -227,7 +261,7 @@ def order_andrey(symbol, side, qty_m, qty_2, qty_3, count_l, stop_loss, st_one, 
         side=side,
         order_type="Market",
         qty=round(float(qty_m), 3),
-        stop_loss=round(float(stop_loss), count_l),
+        stop_loss=stop_loss,
         time_in_force="GoodTillCancel",
         reduce_only=False,
         close_on_trigger=False
@@ -237,9 +271,9 @@ def order_andrey(symbol, side, qty_m, qty_2, qty_3, count_l, stop_loss, st_one, 
         symbol=symbol,
         side=side,
         order_type="Limit",
-        price=round(float(st_one),3),
+        price=st_one,
         qty=round(float(qty_2), 3),
-        stop_loss=round(float(stop_loss), count_l),
+        stop_loss=stop_loss,
         order_link_id=limit_link_id1,
         time_in_force="GoodTillCancel",
         reduce_only=False,
@@ -250,9 +284,9 @@ def order_andrey(symbol, side, qty_m, qty_2, qty_3, count_l, stop_loss, st_one, 
         symbol=symbol,
         side=side,
         order_type="Limit",
-        price=round(float(st_two),3),
+        price=st_two,
         qty=round(float(qty_3), 3),
-        stop_loss=round(float(stop_loss), count_l),
+        stop_loss=stop_loss,
         order_link_id=limit_link_id2,
         time_in_force="GoodTillCancel",
         reduce_only=False,
@@ -269,7 +303,7 @@ def order_ignat_1(symbol, side, stop_loss, count_l, qty_m_ignat, qty_2_ignat, qt
         side=side,
         order_type="Market",
         qty=round(qty_m_ignat, 3),
-        stop_loss=round(float(stop_loss), count_l),
+        stop_loss=stop_loss,
         time_in_force="GoodTillCancel",
         reduce_only=False,
         close_on_trigger=False
@@ -279,9 +313,9 @@ def order_ignat_1(symbol, side, stop_loss, count_l, qty_m_ignat, qty_2_ignat, qt
         symbol=symbol,
         side=side,
         order_type="Limit",
-        price=round(float(st_one),3),
+        price=st_one,
         qty=round(qty_2_ignat, 3),
-        stop_loss=round(float(stop_loss), count_l),
+        stop_loss=stop_loss,
         order_link_id=limit_link_id1_ignat,
         time_in_force="GoodTillCancel",
         reduce_only=False,
@@ -292,9 +326,9 @@ def order_ignat_1(symbol, side, stop_loss, count_l, qty_m_ignat, qty_2_ignat, qt
         symbol=symbol,
         side=side,
         order_type="Limit",
-        price=round(float(st_two),3),
+        price=st_two,
         qty=round(qty_3_ignat, 3),
-        stop_loss=round(float(stop_loss), count_l),
+        stop_loss=stop_loss,
         order_link_id=limit_link_id2_ignat,
         time_in_force="GoodTillCancel",
         reduce_only=False,
@@ -312,7 +346,7 @@ def order_maks_1(symbol, side, stop_loss, count_l, qty_m_maks, qty_2_maks, qty_3
         side=side,
         order_type="Market",
         qty=round(qty_m_maks, 3),
-        stop_loss=round(float(stop_loss), count_l),
+        stop_loss=stop_loss,
         time_in_force="GoodTillCancel",
         reduce_only=False,
         close_on_trigger=False
@@ -322,9 +356,9 @@ def order_maks_1(symbol, side, stop_loss, count_l, qty_m_maks, qty_2_maks, qty_3
         symbol=symbol,
         side=side,
         order_type="Limit",
-        price=round(float(st_one),3),
+        price=st_one,
         qty=round(qty_2_maks, 3),
-        stop_loss=round(float(stop_loss), count_l),
+        stop_loss=stop_loss,
         order_link_id=limit_link_id1_maks,
         time_in_force="GoodTillCancel",
         reduce_only=False,
@@ -335,9 +369,9 @@ def order_maks_1(symbol, side, stop_loss, count_l, qty_m_maks, qty_2_maks, qty_3
         symbol=symbol,
         side=side,
         order_type="Limit",
-        price=round(float(st_two),3),
+        price=st_two,
         qty=round(qty_3_maks, 3),
-        stop_loss=round(float(stop_loss), count_l),
+        stop_loss=stop_loss,
         order_link_id=limit_link_id2_maks,
         time_in_force="GoodTillCancel",
         reduce_only=False,
@@ -355,7 +389,7 @@ def anti_order(symbol, anti_side, tk1, tk2, tk3, anti_qty_1, anti_qty_2, anti_qt
     print(session_auth.place_active_order(
         symbol=symbol,
         side=anti_side,
-        price=round(float(tk1),3),
+        price=tk1,
         order_type="Limit",
         qty=round(anti_qty_1, 3),
         time_in_force="GoodTillCancel",
@@ -368,7 +402,7 @@ def anti_order(symbol, anti_side, tk1, tk2, tk3, anti_qty_1, anti_qty_2, anti_qt
     print(session_auth.place_active_order(
         symbol=symbol,
         side=anti_side,
-        price=round(float(tk2),3),
+        price=tk2,
         order_type="Limit",
         qty=round(anti_qty_2, 3),
         time_in_force="GoodTillCancel",
@@ -381,7 +415,7 @@ def anti_order(symbol, anti_side, tk1, tk2, tk3, anti_qty_1, anti_qty_2, anti_qt
     print(session_auth.place_active_order(
         symbol=symbol,
         side=anti_side,
-        price=round(float(tk3),3),
+        price=tk3,
         order_type="Limit",
         qty=round(anti_qty_3, 3),
         time_in_force="GoodTillCancel",
@@ -399,7 +433,7 @@ def anti_order_ignat(symbol, anti_side, tk1, tk2, tk3, anti_qty_1_ignat, anti_qt
     print(session_auth_2.place_active_order(
         symbol=symbol,
         side=anti_side,
-        price=round(float(tk1),3),
+        price=tk1,
         qty=round(anti_qty_1_ignat, 3),
         order_type="Limit",
         time_in_force="GoodTillCancel",
@@ -413,7 +447,7 @@ def anti_order_ignat(symbol, anti_side, tk1, tk2, tk3, anti_qty_1_ignat, anti_qt
     print(session_auth_2.place_active_order(
         symbol=symbol,
         side=anti_side,
-        price=round(float(tk2),3),
+        price=tk2,
         order_type="Limit",
         qty=round(anti_qty_2_ignat, 3),
         time_in_force="GoodTillCancel",
@@ -426,7 +460,7 @@ def anti_order_ignat(symbol, anti_side, tk1, tk2, tk3, anti_qty_1_ignat, anti_qt
     print(session_auth_2.place_active_order(
         symbol=symbol,
         side=anti_side,
-        price=round(float(tk3), 3),
+        price=tk3,
         order_type="Limit",
         qty=round(anti_qty_3_ignat, 3),
         time_in_force="GoodTillCancel",
@@ -445,7 +479,7 @@ def anti_order_maks(symbol, anti_side, tk1, tk2, tk3, anti_qty_1_maks, anti_qty_
     print(session_auth_3.place_active_order(
         symbol=symbol,
         side=anti_side,
-        price=round(float(tk1),3),
+        price=tk1,
         qty=round(anti_qty_1_maks, 3),
         order_type="Limit",
         time_in_force="GoodTillCancel",
@@ -459,7 +493,7 @@ def anti_order_maks(symbol, anti_side, tk1, tk2, tk3, anti_qty_1_maks, anti_qty_
     print(session_auth_3.place_active_order(
         symbol=symbol,
         side=anti_side,
-        price=round(float(tk2),3),
+        price=tk2,
         order_type="Limit",
         qty=round(anti_qty_2_maks, 3),
         time_in_force="GoodTillCancel",
@@ -472,7 +506,7 @@ def anti_order_maks(symbol, anti_side, tk1, tk2, tk3, anti_qty_1_maks, anti_qty_
     print(session_auth_3.place_active_order(
         symbol=symbol,
         side=anti_side,
-        price=round(float(tk3), 3),
+        price=tk3,
         order_type="Limit",
         qty=round(anti_qty_3_maks, 3),
         time_in_force="GoodTillCancel",
@@ -514,7 +548,7 @@ while True:
             if x == 3:
                 with TelegramClient(name, api_id, api_hash) as client2:
                     for dialog in client2.iter_dialogs():
-                        if dialog.name == "VIP 5.0 INTRADAY":
+                        if dialog.name == "Test":
                             my_private_channel = dialog
                             my_private_channel_id = dialog.id
                             v3 = my_private_channel.message.message
